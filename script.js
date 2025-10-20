@@ -57,10 +57,37 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for scroll reveal
 document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.skill-category, .project-card, .about-text, .contact-info, .contact-form, .experience-item');
+    const revealElements = document.querySelectorAll('.skill-category, .project-card, .about-text, .contact-info, .contact-form');
     revealElements.forEach(el => {
         el.classList.add('scroll-reveal');
         observer.observe(el);
+    });
+    
+    // Special handling for experience items with staggered animation
+    const experienceItems = document.querySelectorAll('.experience-item');
+    experienceItems.forEach((item, index) => {
+        observer.observe(item);
+    });
+});
+
+// Enhanced experience section animations
+const experienceObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('revealed');
+            }, index * 200); // Stagger the animations
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const experienceItems = document.querySelectorAll('.experience-item');
+    experienceItems.forEach(item => {
+        experienceObserver.observe(item);
     });
 });
 
@@ -184,8 +211,18 @@ function typeWriter(element, text, speed = 100) {
     
     function type() {
         if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
+            const char = text.charAt(i);
+            
+            // Check if we're at the position where "Grant Gardner" should be highlighted
+            if (i === text.indexOf('Grant Gardner')) {
+                // Add the highlighted name
+                element.innerHTML += '<span class="highlight">Grant Gardner</span>';
+                i += 'Grant Gardner'.length;
+            } else {
+                element.innerHTML += char;
+                i++;
+            }
+            
             setTimeout(type, speed);
         }
     }
@@ -197,7 +234,8 @@ function typeWriter(element, text, speed = 100) {
 document.addEventListener('DOMContentLoaded', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
-        const originalText = heroTitle.innerHTML;
+        // Get the text content without HTML tags
+        const originalText = heroTitle.textContent;
         setTimeout(() => {
             typeWriter(heroTitle, originalText, 50);
         }, 500);
