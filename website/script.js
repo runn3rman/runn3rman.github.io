@@ -91,6 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Initialize EmailJS
+(function() {
+    // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+    emailjs.init('T7AJiraBGXFlFS4Su');
+})();
+
 // Contact form handling
 const contactForm = document.getElementById('contact-form');
 
@@ -104,7 +110,7 @@ contactForm.addEventListener('submit', (e) => {
     const subject = formData.get('subject');
     const message = formData.get('message');
     
-    // Simple validation
+    // Enhanced validation
     if (!name || !email || !subject || !message) {
         showNotification('Please fill in all fields', 'error');
         return;
@@ -115,15 +121,99 @@ contactForm.addEventListener('submit', (e) => {
         return;
     }
     
-    // Simulate form submission (replace with actual form handling)
-    showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-    contactForm.reset();
+    // Security: Check for suspicious content
+    if (containsSuspiciousContent(name) || containsSuspiciousContent(subject) || containsSuspiciousContent(message)) {
+        showNotification('Please ensure your message contains appropriate content', 'error');
+        return;
+    }
+    
+    // Rate limiting: Check if user has sent too many messages recently
+    if (isRateLimited()) {
+        showNotification('Please wait a moment before sending another message', 'error');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Send email using EmailJS
+    emailjs.send('service_g7e1bgw', 'template_lk1pke4', {
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message,
+        to_email: 'grantgardner455@gmail.com'
+    })
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        trackFormSubmission(); // Track successful submission
+        showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+        contactForm.reset();
+    }, function(error) {
+        console.log('FAILED...', error);
+        showNotification('Sorry, there was an error sending your message. Please try again or email me directly.', 'error');
+    })
+    .finally(function() {
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
 });
 
 // Email validation function
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+
+// Security: Check for suspicious content
+function containsSuspiciousContent(text) {
+    const suspiciousPatterns = [
+        /<script/i,
+        /javascript:/i,
+        /on\w+\s*=/i,
+        /<iframe/i,
+        /<object/i,
+        /<embed/i,
+        /<link/i,
+        /<meta/i,
+        /http[s]?:\/\/[^\s]+/i, // URLs (optional - remove if you want to allow links)
+        /[<>]/g // Basic HTML tags
+    ];
+    
+    return suspiciousPatterns.some(pattern => pattern.test(text));
+}
+
+// Rate limiting: Simple client-side rate limiting
+function isRateLimited() {
+    const now = Date.now();
+    const lastSubmission = localStorage.getItem('lastFormSubmission');
+    const submissionCount = parseInt(localStorage.getItem('formSubmissionCount') || '0');
+    const timeWindow = 5 * 60 * 1000; // 5 minutes
+    const maxSubmissions = 3; // Max 3 submissions per 5 minutes
+    
+    if (lastSubmission && (now - parseInt(lastSubmission)) < timeWindow) {
+        if (submissionCount >= maxSubmissions) {
+            return true;
+        }
+    } else {
+        // Reset counter if outside time window
+        localStorage.setItem('formSubmissionCount', '0');
+    }
+    
+    return false;
+}
+
+// Track form submission for rate limiting
+function trackFormSubmission() {
+    const now = Date.now();
+    const submissionCount = parseInt(localStorage.getItem('formSubmissionCount') || '0');
+    
+    localStorage.setItem('lastFormSubmission', now.toString());
+    localStorage.setItem('formSubmissionCount', (submissionCount + 1).toString());
 }
 
 // Notification system
@@ -208,34 +298,25 @@ function showNotification(message, type = 'info') {
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
-    let isInHighlight = false;
-    let highlightText = '';
     
     function type() {
         if (i < text.length) {
             const char = text.charAt(i);
             
-            // Check if we're starting "Grant Gardner"
-            if (i === text.indexOf('Grant Gardner')) {
-                isInHighlight = true;
-                highlightText = '';
+            // Check if we're starting "Grant Gardner" (after "Hi, I'm ")
+            if (i === 7) {
+                element.innerHTML += '<span class="highlight">';
             }
             
-            if (isInHighlight) {
-                highlightText += char;
-                // Check if we've completed "Grant Gardner"
-                if (highlightText === 'Grant Gardner') {
-                    element.innerHTML += '<span class="highlight">Grant Gardner</span>';
-                    i += 'Grant Gardner'.length;
-                    isInHighlight = false;
-                } else {
-                    i++;
-                }
-            } else {
-                element.innerHTML += char;
-                i++;
+            // Add the character
+            element.innerHTML += char;
+            
+            // Check if we're ending "Grant Gardner" (after the last character)
+            if (i === text.length - 1) {
+                element.innerHTML += '</span>';
             }
             
+            i++;
             setTimeout(type, speed);
         }
     }
