@@ -327,6 +327,92 @@ section {
     font-weight: 500;
 }
 
+/* Experience Section */
+.experience {
+    background-color: #ffffff;
+}
+
+.experience-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.experience-timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+.experience-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 80px;
+}
+
+.experience-item::before {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px #e5e7eb;
+}
+
+.experience-date {
+    position: absolute;
+    left: -80px;
+    top: 0;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.experience-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.experience-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.experience-content h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2563eb;
+    margin-bottom: 0.75rem;
+}
+
+.experience-content p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
 /* Projects Section */
 .projects {
     background-color: #f8fafc;
@@ -586,6 +672,25 @@ section {
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .experience-timeline::before {
+        left: 15px;
+    }
+
+    .experience-item {
+        padding-left: 50px;
+    }
+
+    .experience-item::before {
+        left: 6px;
+    }
+
+    .experience-date {
+        position: static;
+        display: inline-block;
+        margin-bottom: 1rem;
+        left: auto;
     }
 
     .section-title {

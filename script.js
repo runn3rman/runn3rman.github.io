@@ -57,7 +57,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for scroll reveal
 document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.skill-category, .project-card, .about-text, .contact-info, .contact-form');
+    const revealElements = document.querySelectorAll('.skill-category, .project-card, .about-text, .contact-info, .contact-form, .experience-item');
     revealElements.forEach(el => {
         el.classList.add('scroll-reveal');
         observer.observe(el);
