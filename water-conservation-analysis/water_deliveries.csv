@@ -1,0 +1,157 @@
+Month,Customer,Delivery_AF,Customer_Type
+2024-01-01,Alpine,174.12398914539176,Municipal
+2024-01-01,American Fork,774.5814230748864,Municipal
+2024-01-01,Cedar Hills,0.0,Municipal
+2024-01-01,Highland,0.0,Municipal
+2024-01-01,Lehi,2163.2583155358184,Municipal
+2024-01-01,Pleasant Grove,507.70305705270715,Municipal
+2024-01-01,Provo,166.57431207153013,Municipal
+2024-01-01,Saratoga Springs,0.0,Municipal
+2024-01-01,Spanish Fork,319.5236023864272,Municipal
+2024-01-01,Jordan Valley Water Conservancy District,602.2923357104637,Wholesale
+2024-01-01,Utah County,962.8048977996291,Wholesale
+2024-01-01,Wasatch County,106.66237370318115,Wholesale
+2024-01-01,Summit County,299.1270549751558,Wholesale
+2024-02-01,Alpine,334.39498888267434,Municipal
+2024-02-01,American Fork,1326.7161828955532,Municipal
+2024-02-01,Cedar Hills,0.0,Municipal
+2024-02-01,Highland,155.99407998029375,Municipal
+2024-02-01,Lehi,359.3007972893172,Municipal
+2024-02-01,Pleasant Grove,366.86787087947835,Municipal
+2024-02-01,Provo,1.1842204295933243,Municipal
+2024-02-01,Saratoga Springs,497.64412871631254,Municipal
+2024-02-01,Spanish Fork,196.86427587733166,Municipal
+2024-02-01,Jordan Valley Water Conservancy District,5602.874055466144,Wholesale
+2024-02-01,Utah County,0.0,Wholesale
+2024-02-01,Wasatch County,72.69891373454698,Wholesale
+2024-02-01,Summit County,0.0,Wholesale
+2024-03-01,Alpine,75.47949427206302,Municipal
+2024-03-01,American Fork,0.0,Municipal
+2024-03-01,Cedar Hills,38.90369286074,Municipal
+2024-03-01,Highland,0.0,Municipal
+2024-03-01,Lehi,0.0,Municipal
+2024-03-01,Pleasant Grove,411.3688124731842,Municipal
+2024-03-01,Provo,1487.8834040006107,Municipal
+2024-03-01,Saratoga Springs,0.0,Municipal
+2024-03-01,Spanish Fork,295.6047316940281,Municipal
+2024-03-01,Jordan Valley Water Conservancy District,9961.480721363761,Wholesale
+2024-03-01,Utah County,45.94612734307725,Wholesale
+2024-03-01,Wasatch County,556.1829682356258,Wholesale
+2024-03-01,Summit County,246.21241836479274,Wholesale
+2024-04-01,Alpine,314.3529433502763,Municipal
+2024-04-01,American Fork,1240.3657684860889,Municipal
+2024-04-01,Cedar Hills,264.7194289847082,Municipal
+2024-04-01,Highland,368.10078034736813,Municipal
+2024-04-01,Lehi,0.0,Municipal
+2024-04-01,Pleasant Grove,1249.823796426063,Municipal
+2024-04-01,Provo,1925.7423202975879,Municipal
+2024-04-01,Saratoga Springs,0.0,Municipal
+2024-04-01,Spanish Fork,263.9228987758615,Municipal
+2024-04-01,Jordan Valley Water Conservancy District,2073.889920993832,Wholesale
+2024-04-01,Utah County,0.0,Wholesale
+2024-04-01,Wasatch County,725.0573369717717,Wholesale
+2024-04-01,Summit County,367.3133590200437,Wholesale
+2024-05-01,Alpine,310.99876339105725,Municipal
+2024-05-01,American Fork,392.5736783988068,Municipal
+2024-05-01,Cedar Hills,0.0,Municipal
+2024-05-01,Highland,262.88352104917465,Municipal
+2024-05-01,Lehi,0.0,Municipal
+2024-05-01,Pleasant Grove,861.2032843941096,Municipal
+2024-05-01,Provo,3114.0586332300777,Municipal
+2024-05-01,Saratoga Springs,735.0321137528665,Municipal
+2024-05-01,Spanish Fork,835.5961781217355,Municipal
+2024-05-01,Jordan Valley Water Conservancy District,3969.087212325191,Wholesale
+2024-05-01,Utah County,825.7791298952014,Wholesale
+2024-05-01,Wasatch County,570.6418272692133,Wholesale
+2024-05-01,Summit County,18.9416908623665,Wholesale
+2024-06-01,Alpine,29.126346764950995,Municipal
+2024-06-01,American Fork,976.873114438554,Municipal
+2024-06-01,Cedar Hills,81.5213680739171,Municipal
+2024-06-01,Highland,485.20452403025183,Municipal
+2024-06-01,Lehi,1616.7831569400041,Municipal
+2024-06-01,Pleasant Grove,624.0711343391033,Municipal
+2024-06-01,Provo,3016.0601237133096,Municipal
+2024-06-01,Saratoga Springs,0.0,Municipal
+2024-06-01,Spanish Fork,0.0,Municipal
+2024-06-01,Jordan Valley Water Conservancy District,8122.1071961399375,Wholesale
+2024-06-01,Utah County,2555.3590790126414,Wholesale
+2024-06-01,Wasatch County,0.0,Wholesale
+2024-06-01,Summit County,346.6096037341878,Wholesale
+2024-07-01,Alpine,158.39560700240546,Municipal
+2024-07-01,American Fork,1567.7959597748331,Municipal
+2024-07-01,Cedar Hills,195.90792593554596,Municipal
+2024-07-01,Highland,368.44070657256793,Municipal
+2024-07-01,Lehi,170.76563677966624,Municipal
+2024-07-01,Pleasant Grove,1321.309970881781,Municipal
+2024-07-01,Provo,1115.9985679473912,Municipal
+2024-07-01,Saratoga Springs,316.13479612572695,Municipal
+2024-07-01,Spanish Fork,688.4326717709409,Municipal
+2024-07-01,Jordan Valley Water Conservancy District,1198.3059533626115,Wholesale
+2024-07-01,Utah County,1185.6651718227233,Wholesale
+2024-07-01,Wasatch County,843.3199446201118,Wholesale
+2024-07-01,Summit County,1000.6989525980041,Wholesale
+2024-08-01,Alpine,0.0,Municipal
+2024-08-01,American Fork,1428.7709944097737,Municipal
+2024-08-01,Cedar Hills,163.0376385479635,Municipal
+2024-08-01,Highland,199.4298855100587,Municipal
+2024-08-01,Lehi,10.14174955411022,Municipal
+2024-08-01,Pleasant Grove,291.64309990837523,Municipal
+2024-08-01,Provo,961.2547127252169,Municipal
+2024-08-01,Saratoga Springs,726.9464712112145,Municipal
+2024-08-01,Spanish Fork,856.4146436044925,Municipal
+2024-08-01,Jordan Valley Water Conservancy District,8500.775552923398,Wholesale
+2024-08-01,Utah County,1622.2999968375623,Wholesale
+2024-08-01,Wasatch County,22.92874196191599,Wholesale
+2024-08-01,Summit County,116.14451107798175,Wholesale
+2024-09-01,Alpine,208.3901408075444,Municipal
+2024-09-01,American Fork,1745.5790818342998,Municipal
+2024-09-01,Cedar Hills,304.0746042719503,Municipal
+2024-09-01,Highland,0.0,Municipal
+2024-09-01,Lehi,1186.536242547914,Municipal
+2024-09-01,Pleasant Grove,1335.7791918941302,Municipal
+2024-09-01,Provo,3131.1664158948324,Municipal
+2024-09-01,Saratoga Springs,274.7987951730339,Municipal
+2024-09-01,Spanish Fork,414.1906333021807,Municipal
+2024-09-01,Jordan Valley Water Conservancy District,5002.483782293705,Wholesale
+2024-09-01,Utah County,1006.3957611790636,Wholesale
+2024-09-01,Wasatch County,214.50098778350153,Wholesale
+2024-09-01,Summit County,449.08000414608784,Wholesale
+2024-10-01,Alpine,375.9935651554752,Municipal
+2024-10-01,American Fork,1302.486835328351,Municipal
+2024-10-01,Cedar Hills,83.55301881159319,Municipal
+2024-10-01,Highland,138.1853174115904,Municipal
+2024-10-01,Lehi,1219.7751014605717,Municipal
+2024-10-01,Pleasant Grove,906.0429981679088,Municipal
+2024-10-01,Provo,847.3310050344005,Municipal
+2024-10-01,Saratoga Springs,372.876053108552,Municipal
+2024-10-01,Spanish Fork,142.65252984222352,Municipal
+2024-10-01,Jordan Valley Water Conservancy District,666.2993099573276,Wholesale
+2024-10-01,Utah County,974.010841823957,Wholesale
+2024-10-01,Wasatch County,327.78336503737285,Wholesale
+2024-10-01,Summit County,13.246179874954464,Wholesale
+2024-11-01,Alpine,0.0,Municipal
+2024-11-01,American Fork,455.2340779952925,Municipal
+2024-11-01,Cedar Hills,213.86736141556915,Municipal
+2024-11-01,Highland,271.06273381383653,Municipal
+2024-11-01,Lehi,0.0,Municipal
+2024-11-01,Pleasant Grove,635.2880837916465,Municipal
+2024-11-01,Provo,2732.8941122822293,Municipal
+2024-11-01,Saratoga Springs,418.3061468155405,Municipal
+2024-11-01,Spanish Fork,414.6107192386236,Municipal
+2024-11-01,Jordan Valley Water Conservancy District,4621.1730359892545,Wholesale
+2024-11-01,Utah County,0.0,Wholesale
+2024-11-01,Wasatch County,80.04285517496002,Wholesale
+2024-11-01,Summit County,124.3877052580777,Wholesale
+2024-12-01,Alpine,607.445998080781,Municipal
+2024-12-01,American Fork,653.0605955701776,Municipal
+2024-12-01,Cedar Hills,133.83565364128413,Municipal
+2024-12-01,Highland,125.11275364436848,Municipal
+2024-12-01,Lehi,0.0,Municipal
+2024-12-01,Pleasant Grove,0.0,Municipal
+2024-12-01,Provo,181.60935466325543,Municipal
+2024-12-01,Saratoga Springs,477.2932162095078,Municipal
+2024-12-01,Spanish Fork,0.0,Municipal
+2024-12-01,Jordan Valley Water Conservancy District,0.0,Wholesale
+2024-12-01,Utah County,898.3713928726918,Wholesale
+2024-12-01,Wasatch County,0.0,Wholesale
+2024-12-01,Summit County,207.34212474063418,Wholesale

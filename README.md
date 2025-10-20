@@ -33,10 +33,28 @@ Visit the live website: [runn3rman.github.io](https://runn3rman.github.io)
 
 ```
 runn3rman.github.io/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles and responsive design
-├── script.js           # JavaScript functionality
-└── README.md           # Project documentation
+├── index.html              # Redirect to main website
+├── website/                # Main portfolio website
+│   ├── index.html          # Main portfolio page
+│   ├── styles.css          # CSS styles and responsive design
+│   ├── script.js           # JavaScript functionality
+│   ├── Assets/             # Images and media files
+│   │   └── Good-profile-pic.jpg
+│   └── *-project.html      # Individual project pages
+├── tools/                  # Development tools
+│   ├── project_generator.py    # Auto-generate project pages
+│   └── project-template.html   # Template for project pages
+├── docs/                   # Documentation
+│   ├── local-testing.md    # Local development guide
+│   └── PROJECT_GENERATION_README.md
+├── water-conservation-analysis/  # Data analysis project
+│   ├── data_generator.py
+│   ├── water_analysis.py
+│   ├── requirements.txt
+│   ├── README.md
+│   ├── project_config.json
+│   └── *.png              # Generated visualizations
+└── README.md              # Project documentation
 ```
 
 ## 🚀 Getting Started

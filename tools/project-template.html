@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PROJECT_TITLE}} - Grant Gardner</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        
+        .project-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .project-nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .project-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .project-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1f2937;
+            text-align: center;
+        }
+        
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .insight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .insight-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+        
+        .insight-card p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .viz-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .viz-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .viz-card-content {
+            padding: 1.5rem;
+        }
+        
+        .viz-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+        }
+        
+        .viz-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        .expand-hint {
+            color: #2563eb;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .viz-card:hover .expand-hint {
+            opacity: 1;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            color: #1d4ed8;
+        }
+        
+        .dashboard-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-preview h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+        
+        .dashboard-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dashboard-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Modal Styles */
+        .viz-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .viz-modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .viz-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .viz-modal-close:hover {
+            color: #2563eb;
+            background: #f8fafc;
+            transform: scale(1.1);
+        }
+        
+        .viz-modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .viz-modal-header h2 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .viz-modal-body {
+            padding: 2rem;
+        }
+        
+        .viz-modal-body img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-description {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .modal-description h3 {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-description p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        
+        .modal-description ul {
+            color: #6b7280;
+            padding-left: 1.5rem;
+        }
+        
+        .modal-description li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Project Navigation -->
+    <nav class="project-nav">
+        <div class="container">
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <h1>{{PROJECT_TITLE}}</h1>
+            <p>{{PROJECT_DESCRIPTION}}</p>
+            <div class="tech-stack">
+                {{TECH_STACK}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="insight-grid">
+                {{INSIGHT_CARDS}}
+            </div>
+            
+            <p style="font-size: 1.1rem; color: #6b7280; text-align: center; max-width: 800px; margin: 0 auto;">
+                {{PROJECT_SUMMARY}}
+            </p>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-grid">
+                {{KEY_INSIGHTS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizations -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Data Visualizations</h2>
+            <div class="visualization-grid">
+                {{VISUALIZATIONS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Dashboard -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Interactive Dashboard</h2>
+            <div class="dashboard-preview">
+                <h3>{{DASHBOARD_TITLE}}</h3>
+                <p>{{DASHBOARD_DESCRIPTION}}</p>
+                <a href="{{DASHBOARD_LINK}}" class="dashboard-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    View Interactive Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Implementation -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Technical Implementation</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                {{TECHNICAL_IMPLEMENTATION}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Value -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Business Value</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; color: #1f2937;">{{BUSINESS_VALUE_TITLE}}</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    {{BUSINESS_VALUE_ITEMS}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Links -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Project Resources</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                {{PROJECT_LINKS}}
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Modal -->
+    <div id="vizModal" class="viz-modal">
+        <div class="viz-modal-content">
+            <span class="viz-modal-close" onclick="closeVisualization()">&times;</span>
+            <div class="viz-modal-header">
+                <h2 id="modalTitle">Visualization Details</h2>
+            </div>
+            <div class="viz-modal-body">
+                <img id="modalImage" src="" alt="Expanded Visualization">
+                <div id="modalDescription" class="modal-description">
+                    <!-- Description will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Grant Gardner. All rights reserved.</p>
+                <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Visualization data for modal expansion
+        const visualizationData = {{VISUALIZATION_DATA}};
+
+        function expandVisualization(type) {
+            const modal = document.getElementById('vizModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            const data = visualizationData[type];
+            
+            modalTitle.textContent = data.title;
+            modalImage.src = data.image;
+            modalImage.alt = data.title;
+            modalDescription.innerHTML = data.description;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVisualization() {
+            const modal = document.getElementById('vizModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('vizModal');
+            if (event.target === modal) {
+                closeVisualization();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeVisualization();
+            }
+        });
+    </script>
+</body>
+</html>

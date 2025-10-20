@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utah Water Conservation Analysis - Grant Gardner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+        
+        .project-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .project-nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .project-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .project-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1f2937;
+            text-align: center;
+        }
+        
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .insight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .insight-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+        
+        .insight-card p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .viz-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .viz-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .viz-card-content {
+            padding: 1.5rem;
+        }
+        
+        .viz-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+        }
+        
+        .viz-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+        
+        .viz-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .expand-hint {
+            color: #2563eb;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .viz-card:hover .expand-hint {
+            opacity: 1;
+        }
+        
+        /* Modal Styles */
+        .viz-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .viz-modal-content {
+            position: relative;
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .viz-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .viz-modal-close:hover {
+            color: #2563eb;
+            background: #f8fafc;
+            transform: scale(1.1);
+        }
+        
+        .viz-modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .viz-modal-header h2 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .viz-modal-body {
+            padding: 2rem;
+        }
+        
+        .viz-modal-body img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-description {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .modal-description h3 {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-description p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        
+        .modal-description ul {
+            color: #6b7280;
+            padding-left: 1.5rem;
+        }
+        
+        .modal-description li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .tech-item {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .back-button:hover {
+            color: #1d4ed8;
+        }
+        
+        .dashboard-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-preview h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+        
+        .dashboard-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .dashboard-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Project Navigation -->
+    <nav class="project-nav">
+        <div class="container" style="display: flex; align-items: center;">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <h1>Utah Water Conservation Analysis</h1>
+            <p>A comprehensive data analysis and visualization project showcasing water conservation analytics for the Central Utah Water Conservancy District (CUWCD) 2024 Annual Report.</p>
+            <div class="tech-stack">
+                <span class="tech-item">Python</span>
+                <span class="tech-item">Pandas</span>
+                <span class="tech-item">Matplotlib</span>
+                <span class="tech-item">Seaborn</span>
+                <span class="tech-item">Plotly</span>
+                <span class="tech-item">Data Analysis</span>
+                <span class="tech-item">Visualization</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <h3>6</h3>
+                    <p>Comprehensive Datasets Analyzed</p>
+                </div>
+                <div class="insight-card">
+                    <h3>127,579</h3>
+                    <p>Annual Water Deliveries (Acre-Feet)</p>
+                </div>
+                <div class="insight-card">
+                    <h3>2,510</h3>
+                    <p>Conservation Program Participants</p>
+                </div>
+                <div class="insight-card">
+                    <h3>8.7%</h3>
+                    <p>Utah County GPCD Reduction (2018-2024)</p>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.1rem; color: #6b7280; text-align: center; max-width: 800px; margin: 0 auto;">
+                This project demonstrates advanced data analysis skills through the examination of Utah's water resources, 
+                including snowpack trends, reservoir operations, water deliveries, conservation programs, and GPCD trends. 
+                The analysis provides actionable insights for water conservation companies and stakeholders.
+            </p>
+        </div>
+    </section>
+
+    <!-- Key Insights -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <i class="fas fa-snowflake" style="font-size: 2rem; color: #2563eb; margin-bottom: 1rem;"></i>
+                    <h3>Strong Snowpack Performance</h3>
+                    <p>Jordan River Basin at 134.9% and Lower Green River Basin at 131.2% of 30-year median, indicating excellent water supply conditions.</p>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-tint" style="font-size: 2rem; color: #7c3aed; margin-bottom: 1rem;"></i>
+                    <h3>Healthy Reservoir Levels</h3>
+                    <p>All major reservoirs maintaining 88-93% average capacity, with peak levels reaching 100% during spring runoff.</p>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-leaf" style="font-size: 2rem; color: #4ecdc4; margin-bottom: 1rem;"></i>
+                    <h3>Effective Conservation Programs</h3>
+                    <p>609 turf removal participants converted 612,621 sq ft, with 1,493 smart controllers and 313 high-efficiency toilets installed.</p>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+                    <h3>Measurable Progress</h3>
+                    <p>Utah County achieved 8.7% GPCD reduction since 2018, demonstrating successful conservation education and implementation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizations -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Data Visualizations</h2>
+            <div class="visualization-grid">
+                <div class="viz-card" onclick="expandVisualization('snowpack')">
+                    <img src="../water-conservation-analysis/snowpack_analysis.png" alt="Snowpack Analysis">
+                    <div class="viz-card-content">
+                        <h3>Snowpack Trends Analysis</h3>
+                        <p>Daily SWE measurements showing seasonal patterns, peak snowpack identification, and percent of median comparisons for Jordan and Lower Green River Basins.</p>
+                        <div class="expand-hint">
+                            <i class="fas fa-expand-arrows-alt"></i> Click to expand
+                        </div>
+                    </div>
+                </div>
+                <div class="viz-card" onclick="expandVisualization('reservoir')">
+                    <img src="../water-conservation-analysis/reservoir_analysis.png" alt="Reservoir Operations">
+                    <div class="viz-card-content">
+                        <h3>Reservoir Operations</h3>
+                        <p>Capacity trends over time, current storage levels, and spill event analysis for Strawberry, Jordanelle, and Utah Lake reservoirs.</p>
+                        <div class="expand-hint">
+                            <i class="fas fa-expand-arrows-alt"></i> Click to expand
+                        </div>
+                    </div>
+                </div>
+                <div class="viz-card" onclick="expandVisualization('deliveries')">
+                    <img src="../water-conservation-analysis/water_deliveries_analysis.png" alt="Water Deliveries">
+                    <div class="viz-card-content">
+                        <h3>Water Delivery Patterns</h3>
+                        <p>Monthly delivery trends, top customer analysis, and seasonal patterns for CUP & CWP systems serving municipal and wholesale customers.</p>
+                        <div class="expand-hint">
+                            <i class="fas fa-expand-arrows-alt"></i> Click to expand
+                        </div>
+                    </div>
+                </div>
+                <div class="viz-card" onclick="expandVisualization('conservation')">
+                    <img src="../water-conservation-analysis/conservation_analysis.png" alt="Conservation Programs">
+                    <div class="viz-card-content">
+                        <h3>Conservation Program Effectiveness</h3>
+                        <p>Program participation metrics, water savings quantification, and cost-effectiveness analysis for turf removal, smart controllers, and efficiency upgrades.</p>
+                        <div class="expand-hint">
+                            <i class="fas fa-expand-arrows-alt"></i> Click to expand
+                        </div>
+                    </div>
+                </div>
+                <div class="viz-card" onclick="expandVisualization('gpcd')">
+                    <img src="../water-conservation-analysis/gpcd_analysis.png" alt="GPCD Trends">
+                    <div class="viz-card-content">
+                        <h3>GPCD Trends & Progress</h3>
+                        <p>County-level water use metrics, conservation progress tracking, and trend analysis showing successful reduction in per-capita water consumption.</p>
+                        <div class="expand-hint">
+                            <i class="fas fa-expand-arrows-alt"></i> Click to expand
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Dashboard -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Interactive Dashboard</h2>
+            <div class="dashboard-preview">
+                <h3>Comprehensive Water Conservation Dashboard</h3>
+                <p>An interactive Plotly-based dashboard combining all analyses into a single, explorable interface. Features real-time data exploration, zoomable charts, and exportable insights.</p>
+                <a href="water-conservation-analysis/water_conservation_dashboard.html" class="dashboard-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i>
+                    View Interactive Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Implementation -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Technical Implementation</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="insight-card">
+                    <h3>Data Pipeline</h3>
+                    <p>End-to-end analysis workflow from data generation through visualization, including data cleaning, feature engineering, and quality assurance processes.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Statistical Analysis</h3>
+                    <p>Advanced statistical methods including trend analysis, correlation studies, seasonal decomposition, and predictive modeling for water resource forecasting.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Visualization Design</h3>
+                    <p>Professional-grade static and interactive visualizations using Matplotlib, Seaborn, and Plotly with custom styling and responsive design principles.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>Business Intelligence</h3>
+                    <p>KPI development, executive reporting, and stakeholder communication through data-driven insights and actionable recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Value -->
+    <section class="project-section" style="background-color: #f8fafc;">
+        <div class="project-content">
+            <h2 class="section-title">Business Value</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; color: #1f2937;">For Water Conservation Companies</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <div>
+                        <i class="fas fa-chart-bar" style="font-size: 2rem; color: #2563eb; margin-bottom: 1rem;"></i>
+                        <h4>Performance Metrics</h4>
+                        <p>Quantifiable conservation results and ROI analysis</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-search" style="font-size: 2rem; color: #7c3aed; margin-bottom: 1rem;"></i>
+                        <h4>Trend Identification</h4>
+                        <p>Long-term pattern recognition and forecasting</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-cogs" style="font-size: 2rem; color: #4ecdc4; margin-bottom: 1rem;"></i>
+                        <h4>System Optimization</h4>
+                        <p>Efficiency improvement opportunities</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-users" style="font-size: 2rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+                        <h4>Stakeholder Communication</h4>
+                        <p>Clear data visualization and executive reporting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Links -->
+    <section class="project-section">
+        <div class="project-content">
+            <h2 class="section-title">Project Resources</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="../water-conservation-analysis/water_conservation_dashboard.html" class="dashboard-link" target="_blank">
+                    <i class="fas fa-chart-line"></i>
+                    Interactive Dashboard
+                </a>
+                <a href="../water-conservation-analysis/README.md" class="dashboard-link" target="_blank" style="background: linear-gradient(135deg, #7c3aed, #4ecdc4);">
+                    <i class="fas fa-book"></i>
+                    Documentation
+                </a>
+                <a href="../water-conservation-analysis/data_generator.py" class="dashboard-link" target="_blank" style="background: linear-gradient(135deg, #4ecdc4, #fbbf24);">
+                    <i class="fas fa-code"></i>
+                    Source Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Modal -->
+    <div id="vizModal" class="viz-modal">
+        <div class="viz-modal-content">
+            <span class="viz-modal-close" onclick="closeVisualization()">&times;</span>
+            <div class="viz-modal-header">
+                <h2 id="modalTitle">Visualization Details</h2>
+            </div>
+            <div class="viz-modal-body">
+                <img id="modalImage" src="" alt="Expanded Visualization">
+                <div id="modalDescription" class="modal-description">
+                    <!-- Description will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Grant Gardner. All rights reserved.</p>
+                <p>Built with ❤️ using HTML, CSS, and JavaScript</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Visualization data for modal expansion
+        const visualizationData = {
+            snowpack: {
+                title: "Snowpack Trends Analysis",
+                image: "../water-conservation-analysis/snowpack_analysis.png",
+                description: `
+                    <h3>Key Insights</h3>
+                    <p>This comprehensive snowpack analysis reveals critical water supply information for Utah's water management:</p>
+                    <ul>
+                        <li><strong>Jordan River Basin:</strong> Peak SWE of 30.1 inches, averaging 134.9% of 30-year median</li>
+                        <li><strong>Lower Green River Basin:</strong> Peak SWE of 21.8 inches, averaging 131.2% of 30-year median</li>
+                        <li><strong>Seasonal Patterns:</strong> Clear peak snowpack in March-April with gradual melt through summer</li>
+                        <li><strong>Water Security:</strong> Both basins exceeded normal levels, indicating strong water supply conditions</li>
+                    </ul>
+                    <p>The analysis demonstrates excellent snowpack performance in 2024, providing confidence in water availability for the growing season.</p>
+                `
+            },
+            reservoir: {
+                title: "Reservoir Operations Analysis",
+                image: "../water-conservation-analysis/reservoir_analysis.png",
+                description: `
+                    <h3>Operational Excellence</h3>
+                    <p>Reservoir management analysis shows effective water storage and distribution:</p>
+                    <ul>
+                        <li><strong>Strawberry Reservoir:</strong> 91.6% average capacity, reaching 100% during peak runoff</li>
+                        <li><strong>Jordanelle Reservoir:</strong> 92.6% average capacity with optimal storage efficiency</li>
+                        <li><strong>Utah Lake:</strong> 88.4% average capacity, maintaining healthy levels</li>
+                        <li><strong>Spill Management:</strong> Controlled releases during peak runoff periods</li>
+                    </ul>
+                    <p>All reservoirs maintained healthy levels throughout 2024, demonstrating effective water resource management and system reliability.</p>
+                `
+            },
+            deliveries: {
+                title: "Water Delivery Patterns",
+                image: "../water-conservation-analysis/water_deliveries_analysis.png",
+                description: `
+                    <h3>Delivery System Performance</h3>
+                    <p>Water delivery analysis reveals efficient distribution patterns and customer service:</p>
+                    <ul>
+                        <li><strong>Total Annual Deliveries:</strong> 127,579 acre-feet across all customers</li>
+                        <li><strong>Peak Demand:</strong> June deliveries reached 17,854 AF (40% above average)</li>
+                        <li><strong>Top Customer:</strong> Jordan Valley Water Conservancy District (50,321 AF annually)</li>
+                        <li><strong>Customer Mix:</strong> Balanced municipal and wholesale customer base</li>
+                    </ul>
+                    <p>The system demonstrates reliable water delivery with seasonal demand management and strong customer relationships.</p>
+                `
+            },
+            conservation: {
+                title: "Conservation Program Effectiveness",
+                image: "../water-conservation-analysis/conservation_analysis.png",
+                description: `
+                    <h3>Measurable Conservation Impact</h3>
+                    <p>Conservation programs show significant water savings and community engagement:</p>
+                    <ul>
+                        <li><strong>Total Participants:</strong> 2,510 individuals and organizations</li>
+                        <li><strong>Water Saved:</strong> 73.8 acre-feet through program participation</li>
+                        <li><strong>Area Converted:</strong> 709,298 square feet of turf removal and conversion</li>
+                        <li><strong>Program Mix:</strong> Turf removal (609), smart controllers (1,493), efficient toilets (313)</li>
+                    </ul>
+                    <p>These programs demonstrate successful community engagement and measurable water conservation results, supporting long-term sustainability goals.</p>
+                `
+            },
+            gpcd: {
+                title: "GPCD Trends & Conservation Progress",
+                image: "../water-conservation-analysis/gpcd_analysis.png",
+                description: `
+                    <h3>Conservation Success Story</h3>
+                    <p>GPCD trends demonstrate successful conservation education and implementation:</p>
+                    <ul>
+                        <li><strong>Utah County Progress:</strong> 8.7% reduction from 210 to 192 GPCD (2018-2024)</li>
+                        <li><strong>Statewide Improvement:</strong> 11.4% reduction in average GPCD across all counties</li>
+                        <li><strong>Consistent Trend:</strong> Steady year-over-year improvement in water efficiency</li>
+                        <li><strong>Benchmark Performance:</strong> Utah County performing well below state average</li>
+                    </ul>
+                    <p>The declining GPCD trends indicate successful conservation education, program implementation, and community engagement in water efficiency practices.</p>
+                `
+            }
+        };
+
+        function expandVisualization(type) {
+            const modal = document.getElementById('vizModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalImage = document.getElementById('modalImage');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            const data = visualizationData[type];
+            
+            modalTitle.textContent = data.title;
+            modalImage.src = data.image;
+            modalImage.alt = data.title;
+            modalDescription.innerHTML = data.description;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeVisualization() {
+            const modal = document.getElementById('vizModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('vizModal');
+            if (event.target === modal) {
+                closeVisualization();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeVisualization();
+            }
+        });
+    </script>
+</body>
+</html>

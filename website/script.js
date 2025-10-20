@@ -208,16 +208,29 @@ function showNotification(message, type = 'info') {
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
+    let isInHighlight = false;
+    let highlightText = '';
     
     function type() {
         if (i < text.length) {
             const char = text.charAt(i);
             
-            // Check if we're at the position where "Grant Gardner" should be highlighted
+            // Check if we're starting "Grant Gardner"
             if (i === text.indexOf('Grant Gardner')) {
-                // Add the highlighted name
-                element.innerHTML += '<span class="highlight">Grant Gardner</span>';
-                i += 'Grant Gardner'.length;
+                isInHighlight = true;
+                highlightText = '';
+            }
+            
+            if (isInHighlight) {
+                highlightText += char;
+                // Check if we've completed "Grant Gardner"
+                if (highlightText === 'Grant Gardner') {
+                    element.innerHTML += '<span class="highlight">Grant Gardner</span>';
+                    i += 'Grant Gardner'.length;
+                    isInHighlight = false;
+                } else {
+                    i++;
+                }
             } else {
                 element.innerHTML += char;
                 i++;
