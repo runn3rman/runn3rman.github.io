@@ -6,7 +6,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 body {
@@ -497,6 +497,11 @@ section {
 /* Projects Section */
 .projects {
     background-color: #f8fafc;
+    padding: 0;
+}
+
+.projects .container {
+    padding: 5rem 20px;
 }
 
 .projects-grid {
@@ -853,14 +858,14 @@ section {
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
+    animation: none;
 }
 
-/* Scroll animations */
+/* Scroll animations - disabled */
 .scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
 }
 
 .scroll-reveal.revealed {
